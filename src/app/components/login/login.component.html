@@ -1,9 +1,10 @@
 <!-- Template driven forms -->
 
 <form>
-    <input type="text" placeholder="Username" [(ngModel)]="myform.username" name="username">
-    <input type="text" placeholder="Password" [(ngModel)]="myform.password" name="password">
+    <input type="text" placeholder="Username" [(ngModel)]="myform.username" name="username" #name="ngModel">
+    <input type="password" placeholder="Password" [(ngModel)]="myform.password" name="password" #blah>
     <input type="submit" value="Submit">
 </form>
 
 <p>{{myform | json}}</p>
+<p> Password : {{blah.value}}</p>
