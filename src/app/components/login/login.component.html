@@ -1,18 +1,29 @@
 <!-- Template driven forms -->
 
+<p>Name : </p>
+<p>Valid : {{username.valid}} , invalid : {{username.invalid}}</p>
+<p>Touched : {{username.touched}} , Untouched : {{username.untouched}}</p>
+<p>Pristine : {{username.pristine}} , Dirty : {{username.dirty}}</p>
+<p>Password : </p>
+<p>Valid : {{password.valid}} , invalid : {{password.invalid}}</p>
+<p>Touched : {{password.touched}} , Untouched : {{password.untouched}}</p>
+<p>Pristine : {{password.pristine}} , Dirty : {{password.dirty}}</p>
+
+
+
 <form (submit)="handleSubmit()">
     <input type="text" placeholder="Username" [(ngModel)]="myform.username" name="username" #username="ngModel" required
-        [ngStyle]='{"border" : username.invalid ? "red 1px solid" : "green 1px solid"}' minlength="4">
+        [ngStyle]='{"border" : username.invalid && username.dirty ? "red 1px solid" : "green 1px solid"}' minlength="4">
 
-    <span *ngIf="username.errors?.required">Username not valid</span>
+    <span *ngIf="username.errors?.required && username.dirty">Username not valid</span>
     <span *ngIf="username.errors?.minlength">
         {{username.errors.minlength.requiredLength - username.errors.minlength.actualLength}} Charts Left
     </span>
 
     <input type="password" placeholder="Password" [(ngModel)]="myform.password" name="password" required
         pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{6,})$" #password="ngModel"
-        [ngStyle]='{"border" : password.invalid ? "red 1px solid" : "green 1px solid"}'>
-    <span *ngIf="password.errors?.required">Password is empty</span>
+        [ngStyle]='{"border" : password.invalid && username.dirty ? "red 1px solid" : "green 1px solid"}'>
+    <span *ngIf="password.errors?.required && password.dirty">Password is empty</span>
     <span *ngIf="password.errors?.pattern">Password must contain at least 1 number , 1 captial letter and 1 lowercase
         and at least 6 characters overall
     </span>
@@ -20,13 +31,3 @@
 </form>
 
 <p>{{myform | json}}</p>
-<h1>Password : {{password.value}}</h1>
-<p>Valid Password : {{password.valid}}</p>
-<p>Error : {{password.errors|json}}</p>
-
-<!-- name.errors.required -->
-<!-- name.errors.minlength -->
-
-<!-- 
-<p> Username : {{username.value}}</p>
-<p> Password : {{password.value}}</p> -->
