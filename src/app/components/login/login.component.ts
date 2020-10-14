@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
     password: ""
   }
 
+  handleSubmit() {
+    console.log(this.myform)
+  }
+
   ngOnInit(): void {
   }
 
