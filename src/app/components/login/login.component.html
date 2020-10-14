@@ -1,1 +1,9 @@
-<p>login works!</p>
+<!-- Template driven forms -->
+
+<form>
+    <input type="text" placeholder="Username" [(ngModel)]="myform.username" name="username">
+    <input type="text" placeholder="Password" [(ngModel)]="myform.password" name="password">
+    <input type="submit" value="Submit">
+</form>
+
+<p>{{myform | json}}</p>

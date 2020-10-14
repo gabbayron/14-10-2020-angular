@@ -9,6 +9,11 @@ export class LoginComponent implements OnInit {
 
   constructor() { }
 
+  myform = {
+    username: "",
+    password: ""
+  }
+
   ngOnInit(): void {
   }
 
