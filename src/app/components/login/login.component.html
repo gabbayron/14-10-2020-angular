@@ -3,27 +3,26 @@
 <form (submit)="handleSubmit()">
     <input type="text" placeholder="Username" [(ngModel)]="myform.username" name="username" #username="ngModel" required
         [ngStyle]='{"border" : username.invalid ? "red 1px solid" : "green 1px solid"}' minlength="4">
-    <!-- <span>
-        {{username.errors.required ? "Username Field Is Empty" :""}}
-        {{username.errors.minlength ? username.errors.minlength.requiredLength - username.errors.minlength.actualLength +"Letters Required": ""}}
-        {{!username.errors ? "Well Done!" : ""}}
-    </span> -->
+
     <span *ngIf="username.errors?.required">Username not valid</span>
     <span *ngIf="username.errors?.minlength">
         {{username.errors.minlength.requiredLength - username.errors.minlength.actualLength}} Charts Left
     </span>
 
     <input type="password" placeholder="Password" [(ngModel)]="myform.password" name="password" required
-        #password="ngModel" [ngStyle]='{"border" : password.invalid ? "red 1px solid" : "green 1px solid"}'>
-    <span></span>
+        pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{6,})$" #password="ngModel"
+        [ngStyle]='{"border" : password.invalid ? "red 1px solid" : "green 1px solid"}'>
+    <span *ngIf="password.errors?.required">Password is empty</span>
+    <span *ngIf="password.errors?.pattern">Password must contain at least 1 number , 1 captial letter and 1 lowercase
+        and at least 6 characters overall
+    </span>
     <input type="submit" value="Submit" [disabled]="!username.invalid || password.invalid">
 </form>
 
 <p>{{myform | json}}</p>
-<h1>Name : {{username.value}}</h1>
-<p>Valid Username : {{username.valid}}</p>
+<h1>Password : {{password.value}}</h1>
 <p>Valid Password : {{password.valid}}</p>
-<p>Error : {{username.errors|json}}</p>
+<p>Error : {{password.errors|json}}</p>
 
 <!-- name.errors.required -->
 <!-- name.errors.minlength -->
