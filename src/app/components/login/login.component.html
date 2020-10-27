@@ -27,7 +27,7 @@
     <span *ngIf="password.errors?.pattern">Password must contain at least 1 number , 1 captial letter and 1 lowercase
         and at least 6 characters overall
     </span>
-    <input type="submit" value="Submit" [disabled]="!username.invalid || password.invalid">
+    <input type="submit" value="Submit" [disabled]="username.invalid || password.invalid">
 </form>
 
 <p>{{myform | json}}</p>

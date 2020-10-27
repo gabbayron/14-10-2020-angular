@@ -1,1 +1,27 @@
 <p>register works!</p>
+
+<form [formGroup]="myForm" (ngSubmit)="handleSubmit()">
+    <input type="text" placeholder="name" formControlName="name">
+    <input type="text" placeholder="username" formControlName="username">
+    <span *ngIf="myForm.controls.username.dirty && myForm.controls.username.errors?.required">Username cant be
+        empty</span>
+    <span *ngIf="myForm.controls.username.dirty && myForm.controls.username.errors?.minlength">Username must be at least
+        4 characters</span>
+    <input type="email" placeholder="email" formControlName="email">
+    <input type="text" placeholder="id" formControlName="id">
+    <span *ngIf="myForm.controls.id.errors?.required &&myForm.controls.id.dirty ">Id Is Required</span>
+    <span *ngIf="myForm.controls.id.errors?.id 
+     && myForm.controls.id.dirty &&
+     !myForm.controls.id.errors?.required">
+        {{myForm.controls.id.errors?.id}}
+    </span>
+    <span *ngIf="myForm.controls.email.dirty && myForm.controls.email.invalid">Email must contain @</span>
+    <input type="password" placeholder="password" formControlName="password">
+    <span *ngIf="myForm.controls.password.dirty && myForm.controls.password.invalid">Passowrd cant be empty</span>
+    <input type="submit" value="Register" [disabled]="myForm.invalid">
+</form>
+
+
+{{myForm.value | json}}
+
+{{myForm.controls.id.errors| json}}
